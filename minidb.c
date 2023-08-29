@@ -4,7 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 
-#define PROMPT true
+void print_prompt() {
+  printf("%s", "minidb>> ");
+}
 
 int main(int argc, char *argv[])
 {
@@ -12,9 +14,9 @@ int main(int argc, char *argv[])
   size_t len = 0;
   ssize_t nread;
 
-  while (PROMPT)
+  while (true)
   {
-    printf("%s", "minidb>> ");
+    print_prompt();
     if ((nread = getline(&line, &len, stdin)) > 0)
     {
       // 末尾の改行を終端に変更
@@ -33,3 +35,4 @@ int main(int argc, char *argv[])
   }
   return 0;
 }
+ 
