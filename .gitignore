@@ -2,3 +2,4 @@ main
 a.out
 *.o
 .vscode/
+minidb
