@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         *p = '\0';
       }
 
-      if (strcmp(line, "exit") == 0)
+      if (strcmp(line, ".exit") == 0)
       {
         exit(0);
       }
