@@ -2,7 +2,8 @@
 #define _tokenize.h
 
 typedef enum {
-    TK_COMMAND,
+    TK_STRING,
+    TK_INT,
     TK_EOF,
 } TokenKind;
 
