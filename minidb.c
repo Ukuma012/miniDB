@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <string.h>
+#include "tokenize.h"
 
 typedef struct {
   char *buffer;
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
       close_input_bufer(input_buffer);
       exit(0);
     } else {
-      printf("Unrecognized command %s. \n", input_buffer->buffer);
+      tokenize(input_buffer->buffer);
     }
   }
   return 0;
