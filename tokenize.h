@@ -16,7 +16,7 @@ struct Token {
     Token *next;
     char *value;
 };
-
 Token *tokenize(const char*);
+void free_token(Token* );
 
 #endif

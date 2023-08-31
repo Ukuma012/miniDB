@@ -12,6 +12,15 @@ Token *new_token(TokenKind kind, Token *cur, const char *value) {
     return tok;
 }
 
+void free_token(Token *tokens) {
+    while(tokens != NULL) {
+        Token *tmp = tokens;
+        tokens = tokens->next;
+        free(tmp->value);
+        free(tmp); 
+    }
+}
+
 Token *tokenize(const char* input) {
     Token head;
     head.next = NULL;

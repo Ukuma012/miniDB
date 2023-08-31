@@ -39,16 +39,18 @@ void close_input_bufer(InputBuffer *input_buffer) {
 
 int main(int argc, char *argv[])
 {
+  Token* token;
   InputBuffer *input_buffer = new_input_buffer();
   while(true) {
     print_prompt();
     read_input(input_buffer);
 
-    if(strcmp(input_buffer->buffer, ".exit") == 0) {
+    if(strcmp(input_buffer->buffer, "exit") == 0) {
       close_input_bufer(input_buffer);
       exit(0);
     } else {
-      tokenize(input_buffer->buffer);
+      token = tokenize(input_buffer->buffer);
+      free_token(token);
     }
   }
   return 0;
