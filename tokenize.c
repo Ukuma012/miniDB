@@ -33,20 +33,17 @@ Token *tokenize(const char* input) {
         }
 
         if(strncmp(input, "select", SELECT_LENGTH) == 0 && !isalnum(input[SELECT_LENGTH])) {
-            printf("%s\n", "select!");
             cur = new_token(TK_KEYWORD, cur, "select");
             input += SELECT_LENGTH;
             continue;
         }
 
         if(strncmp(input, "insert", INSERT_LENGTH) == 0 && !isalnum(input[INSERT_LENGTH])) {
-            printf("%s\n", "insert!");
             cur = new_token(TK_KEYWORD, cur, "insert");
             input += INSERT_LENGTH;
             continue;
         }
 
-        fprintf(stderr, "failed to tokenize\n");
         break;
     }
 
