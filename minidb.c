@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "tokenize.h"
+#include "parser.h"
 
 typedef struct {
   char *buffer;
@@ -40,6 +41,7 @@ void close_input_bufer(InputBuffer *input_buffer) {
 int main(int argc, char *argv[])
 {
   Token* token;
+  Statement statement;
   InputBuffer *input_buffer = new_input_buffer();
   while(true) {
     print_prompt();
@@ -50,6 +52,17 @@ int main(int argc, char *argv[])
       exit(0);
     } else {
       token = tokenize(input_buffer->buffer);
+      switch(parse_statement_type(token, &statement)) {
+        case(PREPARE_SECCESS):
+          break;
+        case(PREPARE_UNRECOGNIZED_STATEMENT):
+          printf("Unrecognized keyword at start of '%s'.\n", token->value);
+          continue;
+      }
+
+      execute_statement(&statement);
+      printf("%s\n", "Executed");
+
       free_token(token);
     }
   }

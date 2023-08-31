@@ -1,6 +1,8 @@
+#include <stdio.h>
+#include <string.h>
 #include "parser.h"
 
-PrepareResult parse_statement_type(Token* tokens, Statement* statement) {
+ParseResult parse_statement_type(Token* tokens, Statement* statement) {
     if(tokens->kind == TK_KEYWORD && strcmp(tokens->value, "select") == 0) {
         statement->type = STATEMENT_SELECT;
         return PREPARE_SECCESS;

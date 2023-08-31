@@ -7,7 +7,7 @@ typedef enum
 {
     PREPARE_SECCESS,
     PREPARE_UNRECOGNIZED_STATEMENT
-} PrepareResult;
+} ParseResult;
 
 typedef enum
 {
@@ -20,7 +20,7 @@ typedef struct
     StatementType type;
 } Statement;
 
-PrepareResult parse_statement_type(Token*, Statement*);
+ParseResult parse_statement_type(Token*, Statement*);
 void execute_statement(Statement*);
 
 #endif
