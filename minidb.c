@@ -55,6 +55,9 @@ int main(int argc, char *argv[])
       switch(parse_statement_type(token, &statement)) {
         case(PREPARE_SECCESS):
           break;
+				case(PREPARE_SYNTAX_ERROR):
+					printf("%s\n", "Syntax Error");
+					continue;
         case(PREPARE_UNRECOGNIZED_STATEMENT):
           printf("Unrecognized keyword at start of '%s'.\n", token->value);
           continue;

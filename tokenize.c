@@ -32,18 +32,44 @@ Token *tokenize(const char* input) {
             continue;
         }
 
-        if(strncmp(input, "select", SELECT_LENGTH) == 0 && !isalnum(input[SELECT_LENGTH])) {
-            cur = new_token(TK_KEYWORD, cur, "select");
+
+        if(strncmp(input, "SELECT", SELECT_LENGTH) == 0 && !isalnum(input[SELECT_LENGTH])) {
+            cur = new_token(TK_KEYWORD, cur, "SELECT");
             input += SELECT_LENGTH;
             continue;
         }
 
-        if(strncmp(input, "insert", INSERT_LENGTH) == 0 && !isalnum(input[INSERT_LENGTH])) {
-            cur = new_token(TK_KEYWORD, cur, "insert");
+        if(strncmp(input, "INSERT", INSERT_LENGTH) == 0 && !isalnum(input[INSERT_LENGTH])) {
+            cur = new_token(TK_KEYWORD, cur, "INSERT");
             input += INSERT_LENGTH;
             continue;
         }
 
+				if(isalpha(*input)) {
+					char identifier[IDENTIFIER_LENGTH];
+					int i = 0;
+					while(isalnum(*input) || *input == '_' || *input == '@' || *input == '.') {
+						identifier[i++] = *input;
+						input++;
+					}
+					identifier[i] = '\0';
+					cur = new_token(TK_IDENTIFIER, cur, identifier);
+					continue;
+				}
+
+				if(isdigit(*input)) {
+					char number[NUMBER_LENGTH];
+					int j = 0;
+					while(isdigit(*input)) {
+						number[j++] = *input;
+						input++;
+					}
+					number[j] = '\0';
+					cur = new_token(TK_NUM, cur, number);	
+					continue;
+				}
+
+				cur = new_token(TK_UNKNOWN, cur, input);
         break;
     }
 
