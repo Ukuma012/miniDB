@@ -9,19 +9,19 @@
 #define INSERT_LENGTH 6
 
 typedef enum {
-		TK_KEYWORD,
-		TK_IDENTIFIER,
-		TK_NUM,
-		TK_UNKNOWN,
-		TK_EOF,
+	TK_KEYWORD,
+	TK_IDENTIFIER,
+	TK_NUM,
+	TK_UNKNOWN,
+	TK_EOF,
 } TokenKind;
 
 typedef struct Token Token;
 
 struct Token {
-		TokenKind kind;
-		Token *next;
-		char *value;
+	TokenKind kind;
+	Token *next;
+	char *value;
 };
 
 Token *tokenize(const char*);
