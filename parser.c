@@ -17,7 +17,7 @@ ParseResult parse_statement_type(Token* tokens, Statement* statement) {
 	// INSERT 1 Ukuma ukuma@gmail.com
 	if(tokens->kind == TK_KEYWORD && strcmp(tokens->value, "INSERT") == 0) {
 		statement->type = STATEMENT_INSERT;
-		// @todo function!
+		// @todo refactoring
 
 		tokens = tokens->next;
 		if(tokens->kind == TK_NUM) {
