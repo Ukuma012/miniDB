@@ -2,5 +2,5 @@ main
 a.out
 *.o
 .vscode/
-.swp
+*.swp
 minidb
