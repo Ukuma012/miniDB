@@ -30,14 +30,22 @@ ParseResult parse_statement_type(Token* tokens, Statement* statement) {
 
 		tokens = tokens->next;
 		if(tokens->kind == TK_IDENTIFIER) {
-			statement->row_to_insert.username = strdup(tokens->value);
+			if(strlen(tokens->value) <= COLUMN_USERNAME_SIZE) {
+				strncpy(statement->row_to_insert.username, tokens->value, COLUMN_USERNAME_SIZE);
+			} else {
+				return PREPARE_STRING_TOO_LONG;
+			}
 		} else {
 			return PREPARE_SYNTAX_ERROR;
 		}
 
 		tokens = tokens->next;
 		if(tokens->kind == TK_IDENTIFIER) {
-			statement->row_to_insert.email = strdup(tokens->value);
+			if(strlen(tokens->value) <= COLUMN_EMAIL_SIZE) {
+				strncpy(statement->row_to_insert.email, tokens->value, COLUMN_EMAIL_SIZE);
+			} else {
+				return PREPARE_STRING_TOO_LONG;
+			}
 		} else {
 			return PREPARE_SYNTAX_ERROR;
 		}

@@ -3,9 +3,13 @@
 
 #include "tokenize.h"
 
+#define COLUMN_USERNAME_SIZE 32
+#define COLUMN_EMAIL_SIZE 255
+
 typedef enum
 {
 		PREPARE_SECCESS,
+		PREPARE_STRING_TOO_LONG,
 		PREPARE_SYNTAX_ERROR,
 		PREPARE_UNRECOGNIZED_STATEMENT
 } ParseResult;
@@ -18,8 +22,8 @@ typedef enum
 
 typedef struct {
 		uint32_t id;
-		char *username;
-		char *email;
+		char username[COLUMN_USERNAME_SIZE];
+		char email[COLUMN_EMAIL_SIZE];
 } Row;
 
 typedef struct
