@@ -55,6 +55,9 @@ int main(int argc, char *argv[])
 			switch(parse_statement_type(token, &statement)) {
 				case(PREPARE_SECCESS):
 					break;
+				case(PREPARE_STRING_TOO_LONG):
+					printf("%s\n", "String is too long");
+					continue;
 				case(PREPARE_SYNTAX_ERROR):
 					printf("%s\n", "Syntax Error. Could not parse statement.");
 					continue;
