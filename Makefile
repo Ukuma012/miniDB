@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -O2
 
-SRCS = minidb.c tokenize.c parser.c
+SRCS = minidb.c tokenize.c parser.c table.c
 OBJS = $(SRCS:.c=.o)
 TARGET = minidb
 
