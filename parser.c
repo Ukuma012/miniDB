@@ -56,15 +56,3 @@ ParseResult parse_statement_type(Token* tokens, Statement* statement) {
 	return PREPARE_UNRECOGNIZED_STATEMENT;
 
 }
-
-void execute_statement(Statement* statment) {
-	switch (statment->type) {
-		case (STATEMENT_INSERT):
-			printf("%s", "This is where we would do an insert.\n");
-			break;
-
-		case (STATEMENT_SELECT):
-			printf("%s", "This is where we would do a select.\n");
-			break;
-	}
-}

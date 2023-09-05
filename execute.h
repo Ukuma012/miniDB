@@ -1,0 +1,15 @@
+#ifndef EXECUTE_H
+#define EXECUTE_H
+
+#include "parser.h"
+#include "table.h"
+
+typedef enum {
+	EXECUTE_SUCCESS,
+	EXECUTE_TABLE_FULL,
+	EXECUTE_FAILED
+} ExecuteResult;
+
+ExecuteResult execute_statement(Statement*, Table* );
+
+#endif

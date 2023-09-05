@@ -34,6 +34,5 @@ typedef struct
 
 
 ParseResult parse_statement_type(Token*, Statement*);
-void execute_statement(Statement*);
 
 #endif

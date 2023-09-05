@@ -6,6 +6,7 @@
 #include "tokenize.h"
 #include "parser.h"
 #include "table.h"
+#include "execute.h"
 
 typedef struct {
 	char *buffer;
@@ -72,8 +73,15 @@ int main(int argc, char *argv[])
 					continue;
 			}
 
-			execute_statement(&statement);
-			printf("%s\n", "Executed");
+			switch(execute_statement(&statement, table)) {
+				case(EXECUTE_SUCCESS):
+					printf("%s\n", "Executed");
+					break;
+
+				case(EXECUTE_TABLE_FULL):
+					printf("%s\n", "Error table full");
+					break;
+			}
 
 			free_token(token);
 		}
