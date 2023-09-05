@@ -5,6 +5,7 @@
 #include <string.h>
 #include "tokenize.h"
 #include "parser.h"
+#include "table.h"
 
 typedef struct {
 	char *buffer;
@@ -42,13 +43,18 @@ int main(int argc, char *argv[])
 {
 	Token* token;
 	Statement statement;
+	Table* table;
+
 	InputBuffer *input_buffer = new_input_buffer();
+	table = new_table();
+
 	while(true) {
 		print_prompt();
 		read_input(input_buffer);
 
 		if(strcmp(input_buffer->buffer, "exit") == 0) {
 			close_input_bufer(input_buffer);
+			free_table(table);
 			exit(0);
 		} else {
 			token = tokenize(input_buffer->buffer);
