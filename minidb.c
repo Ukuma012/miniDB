@@ -35,7 +35,7 @@ void read_input(InputBuffer *input_buffer) {
 	input_buffer->buffer[bytes_read - 1] = 0;
 }
 
-void close_input_bufer(InputBuffer *input_buffer) {
+void close_input_buffer(InputBuffer *input_buffer) {
 	free(input_buffer->buffer);
 	free(input_buffer);
 }
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 		read_input(input_buffer);
 
 		if(strcmp(input_buffer->buffer, "exit") == 0) {
-			close_input_bufer(input_buffer);
+			close_input_buffer(input_buffer);
 			free_table(table);
 			exit(0);
 		} else {
