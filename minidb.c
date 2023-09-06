@@ -8,24 +8,29 @@
 #include "table.h"
 #include "execute.h"
 
-typedef struct {
+typedef struct
+{
 	char *buffer;
 	size_t buffer_length;
 	ssize_t input_length;
 } InputBuffer;
 
-InputBuffer *new_input_buffer() {
+InputBuffer *new_input_buffer()
+{
 	InputBuffer *input_buffer = calloc(1, sizeof(InputBuffer));
 	return input_buffer;
 }
 
-void print_prompt() {
+void print_prompt()
+{
 	printf("%s", "minidb>> ");
 }
 
-void read_input(InputBuffer *input_buffer) {
+void read_input(InputBuffer *input_buffer)
+{
 	ssize_t bytes_read = getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
-	if(bytes_read <= 0) {
+	if (bytes_read <= 0)
+	{
 		fprintf(stderr, "error reading input\n");
 		exit(1);
 	}
@@ -35,56 +40,63 @@ void read_input(InputBuffer *input_buffer) {
 	input_buffer->buffer[bytes_read - 1] = 0;
 }
 
-void close_input_buffer(InputBuffer *input_buffer) {
+void close_input_buffer(InputBuffer *input_buffer)
+{
 	free(input_buffer->buffer);
 	free(input_buffer);
 }
 
 int main(int argc, char *argv[])
 {
-	Token* token;
+	Token *token;
 	Statement statement;
-	Table* table;
+	Table *table;
 
 	InputBuffer *input_buffer = new_input_buffer();
 	table = new_table();
 
-	while(true) {
+	while (true)
+	{
 		print_prompt();
 		read_input(input_buffer);
 
-		if(strcmp(input_buffer->buffer, "exit") == 0) {
+		if (strcmp(input_buffer->buffer, "exit") == 0)
+		{
 			close_input_buffer(input_buffer);
 			free_table(table);
 			exit(0);
-		} else {
+		}
+		else
+		{
 			token = tokenize(input_buffer->buffer);
-			switch(parse_statement_type(token, &statement)) {
-				case(PREPARE_SECCESS):
-					break;
-				case(PREPARE_STRING_TOO_LONG):
-					printf("%s\n", "String is too long");
-					continue;
-				case(PREPARE_SYNTAX_ERROR):
-					printf("%s\n", "Syntax Error. Could not parse statement.");
-					continue;
-				case(PREPARE_UNRECOGNIZED_STATEMENT):
-					printf("Unrecognized keyword at start of '%s'.\n", token->value);
-					continue;
+			switch (parse_statement_type(token, &statement))
+			{
+			case (PREPARE_SECCESS):
+				break;
+			case (PREPARE_STRING_TOO_LONG):
+				printf("%s\n", "String is too long");
+				continue;
+			case (PREPARE_SYNTAX_ERROR):
+				printf("%s\n", "Syntax Error. Could not parse statement.");
+				continue;
+			case (PREPARE_UNRECOGNIZED_STATEMENT):
+				printf("Unrecognized keyword at start of '%s'.\n", token->value);
+				continue;
 			}
 
-			switch(execute_statement(&statement, table)) {
-				case(EXECUTE_SUCCESS):
-					printf("%s\n", "Executed");
-					break;
+			switch (execute_statement(&statement, table))
+			{
+			case (EXECUTE_SUCCESS):
+				printf("%s\n", "Executed");
+				break;
 
-				case(EXECUTE_FAILED):
-					printf("%s\n", "Error execute failed");
-					break;
+			case (EXECUTE_FAILED):
+				printf("%s\n", "Error execute failed");
+				break;
 
-				case(EXECUTE_TABLE_FULL):
-					printf("%s\n", "Error table full");
-					break;
+			case (EXECUTE_TABLE_FULL):
+				printf("%s\n", "Error table full");
+				break;
 			}
 
 			free_token(token);
