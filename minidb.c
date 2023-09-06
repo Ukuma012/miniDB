@@ -78,6 +78,10 @@ int main(int argc, char *argv[])
 					printf("%s\n", "Executed");
 					break;
 
+				case(EXECUTE_FAILED):
+					printf("%s\n", "Error execute failed");
+					break;
+
 				case(EXECUTE_TABLE_FULL):
 					printf("%s\n", "Error table full");
 					break;
