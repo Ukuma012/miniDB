@@ -23,6 +23,9 @@ ParseResult parse_statement_type(Token* tokens, Statement* statement) {
 		if(tokens->kind == TK_NUM) {
 			uint32_t num;
 			num = strtol(tokens->value, NULL, 10);
+			if(num < 0) {
+				printf("%s\n", "must be positive!");
+			}
 			statement->row_to_insert.id = num;
 		} else {
 			return PREPARE_SYNTAX_ERROR;
