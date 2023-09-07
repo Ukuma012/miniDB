@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
 		{
 			close_input_buffer(input_buffer);
 			free_table(table);
+			printf("%s\n", "bye");
 			exit(0);
 		}
 		else
