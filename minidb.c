@@ -7,6 +7,7 @@
 #include "parser.h"
 #include "table.h"
 #include "execute.h"
+#include "pager.h"
 
 typedef struct
 {
@@ -48,12 +49,19 @@ void close_input_buffer(InputBuffer *input_buffer)
 
 int main(int argc, char *argv[])
 {
+	if (argc < 2) {
+		fprintf(stderr, "Must supply a database filename\n");
+		exit(1);
+	}
+
+	char* filename = argv[1];
+
 	Token *token;
 	Statement statement;
 	Table *table;
 
 	InputBuffer *input_buffer = new_input_buffer();
-	table = new_table();
+	table = db_open(filename);
 
 	while (true)
 	{
@@ -63,7 +71,7 @@ int main(int argc, char *argv[])
 		if (strcmp(input_buffer->buffer, "exit") == 0)
 		{
 			close_input_buffer(input_buffer);
-			free_table(table);
+			db_close(table);
 			printf("%s\n", "bye");
 			exit(0);
 		}
