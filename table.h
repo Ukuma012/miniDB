@@ -4,9 +4,8 @@
 #include <stdint.h>
 #include "parser.h"
 #include "pager.h"
-#include "cursor.h"
 
-#define size_of_attribute(Struct, Attribute) sizeof(((Struct* )0)->Attribute)
+#define size_of_attribute(Struct, Attribute) sizeof(((Struct *)0)->Attribute)
 #define TABLE_MAX_PAGES 100
 
 extern const uint32_t ID_SIZE;
@@ -23,15 +22,16 @@ extern const uint32_t PAGE_SIZE;
 extern const uint32_t ROWS_PER_PAGE;
 extern const uint32_t TABLE_MAX_ROWS;
 
-typedef struct {
-	Pager* pager;
+typedef struct
+{
+	Pager *pager;
 	uint32_t num_rows;
 } Table;
 
-void serialize_row(Row*, void*);
-void deserialize_row(void*, Row*);
-void print_row(Row*);
-Table* db_open(const char* );
-void db_close(Table*);
+void serialize_row(Row *, void *);
+void deserialize_row(void *, Row *);
+void print_row(Row *);
+Table *db_open(const char *);
+void db_close(Table *);
 
 #endif
