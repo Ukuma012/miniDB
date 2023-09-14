@@ -19,13 +19,11 @@ extern const uint32_t ROW_SIZE;
 
 // TABLES
 extern const uint32_t PAGE_SIZE;
-extern const uint32_t ROWS_PER_PAGE;
-extern const uint32_t TABLE_MAX_ROWS;
 
 typedef struct
 {
 	Pager *pager;
-	uint32_t num_rows;
+	uint32_t root_page_num;
 } Table;
 
 void serialize_row(Row *, void *);
