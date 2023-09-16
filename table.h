@@ -6,7 +6,6 @@
 #include "pager.h"
 
 #define size_of_attribute(Struct, Attribute) sizeof(((Struct *)0)->Attribute)
-#define TABLE_MAX_PAGES 100
 
 extern const uint32_t ID_SIZE;
 extern const uint32_t USERNAME_SIZE;
