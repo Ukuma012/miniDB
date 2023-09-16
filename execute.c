@@ -5,6 +5,11 @@
 #include "cursor.h"
 #include "tree.h"
 
+ExecuteResult execute_const(Statement* statement) {
+	print_const();
+	return EXECUTE_SUCCESS;
+}
+
 ExecuteResult execute_insert(Statement *statement, Table *table)
 {
 	void* node = get_page(table->pager, table->root_page_num);
@@ -40,16 +45,19 @@ ExecuteResult execute_statement(Statement *statement, Table *table)
 {
 	switch (statement->type)
 	{
-	case (STATEMENT_INSERT):
-		return execute_insert(statement, table);
-		break;
+		case (STATEMENT_CONST):
+			return execute_const(statement);
+			break;
+		case (STATEMENT_INSERT):
+			return execute_insert(statement, table);
+			break;
 
-	case (STATEMENT_SELECT):
-		return execute_select(statement, table);
-		break;
+		case (STATEMENT_SELECT):
+			return execute_select(statement, table);
+			break;
 
-	default:
-		return EXECUTE_FAILED;
-		break;
+		default:
+			return EXECUTE_FAILED;
+			break;
 	}
 }

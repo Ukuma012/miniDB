@@ -7,6 +7,7 @@
 #define NUMBER_LENGTH 255
 #define SELECT_LENGTH 6
 #define INSERT_LENGTH 6
+#define CONST_LENGTH 5
 
 typedef enum {
 	TK_KEYWORD,

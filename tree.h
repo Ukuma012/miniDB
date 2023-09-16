@@ -14,5 +14,6 @@ uint32_t* leaf_node_key(void*, uint32_t);
 void* leaf_node_value(void*, uint32_t);
 void initialize_leaf_node(void*);
 void leaf_node_insert(Cursor*, uint32_t, Row*);
+void print_const();
 
 #endif

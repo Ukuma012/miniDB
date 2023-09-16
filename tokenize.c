@@ -32,6 +32,12 @@ Token *tokenize(const char* input) {
 			continue;
 		}
 
+		if(strncmp(input, "CONST", CONST_LENGTH) == 0 && !isalnum(input[CONST_LENGTH])) {
+			cur = new_token(TK_KEYWORD, cur, "CONST");
+			input += CONST_LENGTH;
+			continue;
+		}
+
 
 		if(strncmp(input, "SELECT", SELECT_LENGTH) == 0 && !isalnum(input[SELECT_LENGTH])) {
 			cur = new_token(TK_KEYWORD, cur, "SELECT");

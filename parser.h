@@ -16,6 +16,7 @@ typedef enum
 
 typedef enum
 {
+		STATEMENT_CONST,
 		STATEMENT_INSERT,
 		STATEMENT_SELECT,
 } StatementType;
