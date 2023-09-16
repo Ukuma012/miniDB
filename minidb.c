@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 			token = tokenize(input_buffer->buffer);
 			switch (parse_statement_type(token, &statement))
 			{
-			case (PREPARE_SECCESS):
+			case (PREPARE_SUCCESS):
 				break;
 			case (PREPARE_STRING_TOO_LONG):
 				printf("%s\n", "String is too long");
