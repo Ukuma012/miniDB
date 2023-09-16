@@ -3,7 +3,13 @@
 #include "execute.h"
 #include "table.h"
 #include "cursor.h"
+#include "pager.h"
 #include "tree.h"
+
+ExecuteResult execute_btree(Statement* statement, Table* table) {
+	print_leaf_node(get_page(table->pager, 0));
+	return EXECUTE_SUCCESS;
+}
 
 ExecuteResult execute_const(Statement* statement) {
 	print_const();
@@ -45,9 +51,14 @@ ExecuteResult execute_statement(Statement *statement, Table *table)
 {
 	switch (statement->type)
 	{
+		case (STATEMENT_BTREE):
+			return execute_btree(statement, table);
+			break;
+			
 		case (STATEMENT_CONST):
 			return execute_const(statement);
 			break;
+
 		case (STATEMENT_INSERT):
 			return execute_insert(statement, table);
 			break;

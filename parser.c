@@ -8,6 +8,11 @@ ParseResult parse_statement_type(Token* tokens, Statement* statement) {
 		return PREPARE_UNRECOGNIZED_STATEMENT;
 	}
 
+	if(tokens->kind == TK_KEYWORD && strcmp(tokens->value, "BTREE") == 0) {
+		statement->type = STATEMENT_BTREE;
+		return PREPARE_SUCCESS;
+	}
+
 	if(tokens->kind == TK_KEYWORD && strcmp(tokens->value, "CONST") == 0) {
 		statement->type = STATEMENT_CONST;
 		return PREPARE_SUCCESS;
