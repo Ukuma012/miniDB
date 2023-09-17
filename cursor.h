@@ -12,7 +12,6 @@ typedef struct {
 } Cursor;
 
 Cursor* table_start(Table*);
-Cursor* table_end(Table*);
 void cursor_advance(Cursor*);
 void* cursor_value(Cursor* cursor);
 

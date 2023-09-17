@@ -25,26 +25,6 @@ Cursor *table_start(Table *table)
 	return cursor;
 }
 
-Cursor *table_end(Table *table)
-{
-	Cursor *cursor;
-	if ((cursor = malloc(sizeof(Cursor))) == NULL)
-	{
-		fprintf(stderr, "malloc failed in table_start\n");
-		exit(1);
-	}
-
-	cursor->table = table;
-	cursor->page_num = table->root_page_num;
-
-	void* root_node = get_page(table->pager, table->root_page_num);
-	uint32_t num_cells = *leaf_node_num_cells(root_node);
-	cursor->cell_num = num_cells;
-	cursor->end_of_table = true;
-
-	return cursor;
-}
-
 void cursor_advance(Cursor *cursor)
 {
 	uint32_t page_num = cursor->page_num;
