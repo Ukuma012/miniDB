@@ -3,6 +3,7 @@
 #include <string.h>
 #include "tree.h"
 #include "table.h"
+#include "cursor.h"
 
 #define PAGE_SIZE 4096
 
@@ -52,6 +53,7 @@ void* leaf_node_value(void* node, uint32_t cell_num) {
 }
 
 void initialize_leaf_node(void* node) {
+	set_node_type(node, NODE_LEAF);
 	*leaf_node_num_cells(node) = 0;
 }
 
@@ -64,7 +66,7 @@ void leaf_node_insert(Cursor* cursor, uint32_t key, Row* value) {
 	}
 
 	if(cursor->cell_num < num_cells) {
-		for (uint32_t i = num_cells; i < cursor->cell_num; i--) {
+		for (uint32_t i = num_cells; i > cursor->cell_num; i--) {
 			memcpy(leaf_node_cell(node, i), leaf_node_cell(node, i - 1), LEAF_NODE_CELL_SIZE);
 		}
 	}
@@ -90,4 +92,14 @@ void print_leaf_node(void* node) {
 		uint32_t key = *leaf_node_key(node, i);
 		printf("	- %d : %d\n", i, key);
 	}
+}
+
+NodeType get_node_type(void* node) {
+	uint8_t value = *((uint8_t*)(node + NODE_TYPE_OFFSET));
+	return (NodeType)value;
+}
+
+void set_node_type(void* node, NodeType type) {
+	uint8_t value = type;
+	*((uint8_t*)(node + NODE_TYPE_OFFSET)) = value;
 }

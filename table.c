@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "table.h"
 #include "pager.h"
+#include "cursor.h"
 #include "tree.h"
 
 const uint32_t ID_SIZE = size_of_attribute(Row, id);

@@ -106,7 +106,12 @@ int main(int argc, char *argv[])
 			case (EXECUTE_TABLE_FULL):
 				printf("%s\n", "Error table full");
 				break;
+
+			case (EXECUTE_DUPLICATE_KEY):	
+				printf("%s\n", "Error: Duplicate key");
+				break;
 			}
+
 
 			free_token(token);
 		}

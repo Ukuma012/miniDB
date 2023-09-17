@@ -1,8 +1,8 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include "table.h"
 #include <stdbool.h>
+#include "table.h"
 
 typedef struct {
 	Table* table;
@@ -12,7 +12,9 @@ typedef struct {
 } Cursor;
 
 Cursor* table_start(Table*);
+Cursor* table_find(Table*, uint32_t);
 void cursor_advance(Cursor*);
 void* cursor_value(Cursor* cursor);
+Cursor* leaf_node_find(Table*, uint32_t, uint32_t);
 
 #endif
