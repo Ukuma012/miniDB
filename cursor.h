@@ -16,5 +16,6 @@ Cursor* table_find(Table*, uint32_t);
 void cursor_advance(Cursor*);
 void* cursor_value(Cursor* cursor);
 Cursor* leaf_node_find(Table*, uint32_t, uint32_t);
+Cursor* internal_node_find(Table*, uint32_t, uint32_t);
 
 #endif
