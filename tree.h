@@ -24,6 +24,7 @@ uint32_t* internal_node_right_child(void*);
 uint32_t* internal_node_cell(void*, uint32_t);
 uint32_t* internal_node_child(void*, uint32_t);
 uint32_t* internal_node_key(void*, uint32_t);
+uint32_t* leaf_node_next_leaf(void*);
 void initialize_internal_node(void*);
 uint32_t get_node_max_key(void*);
 void leaf_node_insert(Cursor*, uint32_t, Row*);
