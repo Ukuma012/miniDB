@@ -55,6 +55,7 @@ void* get_page(Pager* pager, uint32_t page_num) {
 			num_pages += 1;	
 		}
 
+		// search if it exists
 		if(page_num <= num_pages) {
 			lseek(pager->file_descriptor, page_num * PAGE_SIZE, SEEK_SET);
 			ssize_t bytes_read = read(pager->file_descriptor, page, PAGE_SIZE);
@@ -72,6 +73,10 @@ void* get_page(Pager* pager, uint32_t page_num) {
 	}
 
 	return pager->pages[page_num];
+}
+
+uint32_t get_unused_page_num(Pager* pager) {
+	return pager->num_pages;
 }
 
 void pager_flush(Pager* pager, uint32_t page_num) {

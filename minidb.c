@@ -103,10 +103,6 @@ int main(int argc, char *argv[])
 				printf("%s\n", "Error execute failed");
 				break;
 
-			case (EXECUTE_TABLE_FULL):
-				printf("%s\n", "Error table full");
-				break;
-
 			case (EXECUTE_DUPLICATE_KEY):	
 				printf("%s\n", "Error: Duplicate key");
 				break;
