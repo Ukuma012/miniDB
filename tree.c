@@ -211,7 +211,11 @@ void internal_node_insert(Table* table, uint32_t parent_page_num, uint32_t child
 			void* source = internal_node_cell(parent, i - 1);
 			memcpy(destination, source, INTERNAL_NODE_CELL_SIZE);
 		}
+
+		// update the first key in the parent to be the maximum key in the left child
 		*internal_node_child(parent, index) = child_page_num;
+
+		// Add a new child pointer / key pair after the updated key
 		*internal_node_key(parent, index) = child_max_key;
 	}
 }
