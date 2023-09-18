@@ -208,12 +208,43 @@ void print_const() {
 	printf("LEAF_NODE_MAX_CELLS: %d\n", LEAF_NODE_MAX_CELLS);
 }
 
-void print_leaf_node(void* node) {
-	uint32_t num_cells = *leaf_node_num_cells(node);
-	printf("leaf (size %d)\n", num_cells);
-	for (uint32_t i = 0; i < num_cells; i++) {
-		uint32_t key = *leaf_node_key(node, i);
-		printf("	- %d : %d\n", i, key);
+void indent(uint32_t level) {
+	for (uint32_t i = 0; i < level; i++) {
+		printf("%s", "  ");
+	}
+}
+
+void print_tree(Pager* pager, uint32_t page_num, uint32_t indentaion_level) {
+	void* node = get_page(pager, page_num);
+	uint32_t num_keys, child;
+
+	switch (get_node_type(node)) {
+		case (NODE_LEAF):
+			num_keys = *leaf_node_num_cells(node);
+			indent(indentaion_level);
+			printf("- leaf (size %d)\n", num_keys);
+			for (uint32_t i = 0; i < num_keys; i++) {
+				indent(indentaion_level + 1);
+				printf("- %d\n", *leaf_node_key(node, i));
+			}
+			break;
+		case (NODE_INTERNAL):
+			num_keys = *internal_node_num_keys(node);
+			indent(indentaion_level);
+			printf("- internal (size %d)\n", num_keys);
+			for (uint32_t i = 0; i < num_keys; i++) {
+				child = *internal_node_child(node, i);
+				print_tree(pager, child, indentaion_level + 1);
+
+				indent(indentaion_level + 1);
+				printf("- key %d\n", *internal_node_key(node, i));
+			}
+			child = *internal_node_right_child(node);
+			print_tree(pager, child, indentaion_level + 1);
+			break;
+		
+		default:
+			break;
 	}
 }
 

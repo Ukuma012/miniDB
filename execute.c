@@ -7,7 +7,7 @@
 #include "tree.h"
 
 ExecuteResult execute_btree(Statement* statement, Table* table) {
-	print_leaf_node(get_page(table->pager, 0));
+	print_tree(table->pager, 0, 0);
 	return EXECUTE_SUCCESS;
 }
 

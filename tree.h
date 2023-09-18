@@ -29,7 +29,7 @@ void leaf_node_insert(Cursor*, uint32_t, Row*);
 void leaf_node_split_and_insert(Cursor*, uint32_t, Row*);
 void create_new_root(Table*, uint32_t);
 void print_const();
-void print_leaf_node(void*);
+void print_tree(Pager*, uint32_t, uint32_t);
 NodeType get_node_type(void*);
 void set_node_type(void*, NodeType);
 void set_node_root(void*, bool);
