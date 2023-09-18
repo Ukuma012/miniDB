@@ -114,6 +114,10 @@ uint32_t* internal_node_child(void* node, uint32_t child_num) {
 	}
 }
 
+uint32_t* internal_node_key(void* node, uint32_t key_num) {
+	return internal_node_cell(node, key_num) + INTERNAL_NODE_CHILD_SIZE;
+}
+
 uint32_t* leaf_node_next_leaf(void* node) {
 	return node + LEAF_NODE_NEXT_LEAF_OFFSET;
 }
@@ -135,9 +139,6 @@ uint32_t get_node_max_key(void* node) {
 	}
 }
 
-uint32_t* internal_node_key(void* node, uint32_t key_num) {
-	return internal_node_cell(node, key_num) + INTERNAL_NODE_CHILD_SIZE;
-}
 
 uint32_t internal_node_find_child(void* node, uint32_t key) {
 	uint32_t num_keys = *internal_node_num_keys(node);
