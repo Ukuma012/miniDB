@@ -19,10 +19,20 @@ void* leaf_node_cell(void*, uint32_t);
 uint32_t* leaf_node_key(void*, uint32_t);
 void* leaf_node_value(void*, uint32_t);
 void initialize_leaf_node(void*);
+uint32_t* internal_node_num_keys(void*);
+uint32_t* internal_node_right_child(void*);
+uint32_t* internal_node_cell(void*, uint32_t);
+uint32_t* internal_node_child(void*, uint32_t);
+void initialize_internal_node(void*);
+uint32_t get_node_max_key(void*);
 void leaf_node_insert(Cursor*, uint32_t, Row*);
+void leaf_node_split_and_insert(Cursor*, uint32_t, Row*);
+void create_new_root(Table*, uint32_t);
 void print_const();
 void print_leaf_node(void*);
 NodeType get_node_type(void*);
 void set_node_type(void*, NodeType);
+void set_node_root(void*, bool);
+bool is_node_root(void*) ;
 
 #endif
