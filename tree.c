@@ -175,6 +175,7 @@ void leaf_node_split_and_insert(Cursor* cursor, uint32_t key, Row* value) {
 	*(leaf_node_num_cells(old_node)) = LEAF_NODE_LEFT_SPLIT_COUNT;
 
 	if (is_node_root(old_node)) {
+		printf("%s\n", "Split! New root will be born");
 		return create_new_root(cursor->table, new_page_num);
 	} else {
 		printf("HI!\n");
