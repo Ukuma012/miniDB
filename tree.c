@@ -184,7 +184,7 @@ void leaf_node_split_and_insert(Cursor* cursor, uint32_t key, Row* value) {
 
 void create_new_root(Table* table, uint32_t right_child_page_num) {
 	void* root = get_page(table->pager, table->root_page_num);
-	void* right_child = get_page(table->pager, right_child_page_num);
+	// void* right_child = get_page(table->pager, right_child_page_num);
 	uint32_t left_child_page_num = get_unused_page_num(table->pager);
 	void* left_child = get_page(table->pager, left_child_page_num);
 
